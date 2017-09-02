@@ -82,6 +82,11 @@ class Event_Schema_Common {
 			$supported_plugins['aioec'] = __( 'All in one Event Calendar', 'event-schema' );
 		}
 
+		// check Import Facebook Events
+		if( class_exists( 'Import_Facebook_Events' ) ){
+			$supported_plugins['import_facebook_events'] = __( 'Import Facebook Events', 'event-schema' );
+		}
+
 		// check My Calendar
 		/*if ( is_plugin_active( 'my-calendar/my-calendar.php' ) ) {
 			$supported_plugins['my_calendar'] = __( 'My Calendar', 'event-schema' );
@@ -95,19 +100,22 @@ class Event_Schema_Common {
 	 * @since 1.0.0
 	 * @return string
 	 */
-	public function generate_ldjson( $event = array() ){
+	public function generate_ldjson( $event = array(), $wrapper = true ){
 
 		if( empty($event ) ){
 			return;
 		}
-		$xt_ldjson = '<script type="application/ld+json">
-		{';
+		$xt_ldjson = '';
+		if( $wrapper ){
+			$xt_ldjson .= '<script type="application/ld+json">';
+		}		
+		$xt_ldjson .= '{';
 	
 		if( isset( $event['name'] ) && $event['name'] != '' ){
 			$xt_ldjson .= '"name":"' . esc_attr( $event["name"] ) . '",';
 		}
 		if( isset( $event['description'] ) && $event['description'] != '' ){
-			$xt_ldjson .= '"description":"' . $event["description"] . '",';
+			$xt_ldjson .= '"description":' . json_encode( $event["description"] ). ',';
 		}
 		if( isset( $event['url'] ) && $event['url'] != '' ){
 			$xt_ldjson .= '"url":"' . esc_url( $event["url"] ) . '",';
@@ -215,8 +223,116 @@ class Event_Schema_Common {
 
 		$xt_ldjson .= '"@context":"http://schema.org",
 			"@type":"Event"
+		}';
+		if( $wrapper ){
+			$xt_ldjson .= '</script>';
 		}
-		</script>';
+		
 		return $xt_ldjson;
 	}
+
+	/**
+	 * Generate centralize Event array by Event ID for xylus theme's plugin
+	 *
+	 * @since 1.0.1
+	 */
+	public function es_centralize_array_by_event_id( $event_id ){
+		if( $event_id != '' && is_numeric( $event_id ) ){
+			global $event_schema, $wpdb;
+			$post_xt = get_post( $event_id );
+			$start_date = get_post_meta( $event_id, 'start_ts', true );
+			if( $start_date == '' ){
+				return false;
+			}
+			$name = get_the_title( $event_id );
+			$description = $post_xt->post_excerpt;
+			if( trim( $description ) == '' ){
+				$description = addslashes( preg_replace('/((\w+\W*){54}(\w+))(.*)/', '${1}', $post_xt->post_content) );
+			}
+			
+			$event_url   = get_permalink( $event_id );
+			$image_url = "";
+			if( has_post_thumbnail( $event_id ) ){
+				$image_url = get_the_post_thumbnail_url( $event_id , 'full' );
+			}
+			$is_all_day = get_post_meta( $event_id, '_event_all_day', true );
+			$start_date = get_post_meta( $event_id, 'start_ts', true );
+			$end_date = get_post_meta( $event_id, 'end_ts', true );
+			
+			if( $start_date != ''){
+				$start_date = date( DATE_ATOM, $start_date );
+				if( $is_all_day ){
+					$start_date = date( 'Y-m-d', $start_date ).' 00:00';
+				}
+			}
+			if( $end_date != ''){
+				$end_date = date( DATE_ATOM, $end_date );
+				if( $is_all_day ){
+					$end_date = date( 'Y-m-d', $end_date ).' 23:59';
+				}
+			}
+
+			$centralize_event = array(
+				"ID"         => $event_id,
+				"name"       => $name,
+				"description"=> $description,
+				"url"        => $event_url,
+				"start_date" => $start_date,
+				"end_date"   => $end_date,
+				"is_all_day" => $is_all_day,
+				"image"      => $image_url,
+			);
+
+			$venue_name    = get_post_meta( $event_id, 'venue_name', true );
+			$venue_address = get_post_meta( $event_id, 'venue_address', true );
+			$venue_city    = get_post_meta( $event_id, 'venue_city', true );
+			$venue_state   = get_post_meta( $event_id, 'venue_state', true );
+			$venue_country = get_post_meta( $event_id, 'venue_country', true );
+			$venue_zipcode = get_post_meta( $event_id, 'venue_zipcode', true );
+			$venue_lat     = get_post_meta( $event_id, 'venue_lat', true );
+			$venue_lon     = get_post_meta( $event_id, 'venue_lon', true );
+			$venue_url     = get_post_meta( $event_id, 'venue_url', true );
+
+			if( $venue_name != '' ){
+				$centralize_event['location'] = array(
+					"name" => $venue_name,
+					"telephone" => '',
+					"url" => $venue_url,
+				);
+
+				// Add address.
+				$address = array();					
+				$address['street_address']   = $venue_address;
+				$address['address_locality'] = $venue_city;
+				$address['address_region']   = $venue_state;
+				$address['address_country']  = $venue_country;
+				$address['postal_code']      = $venue_zipcode;
+				$centralize_event['location']['address'] = $address;
+
+				if( $venue_lat != '' && $venue_lon != '' ){
+					$centralize_event['location']['geo'] = array(
+							"latitude"  => $venue_lat,
+							"longitude" => $venue_lon,
+						);
+				}	
+			}			
+			
+			// Add Organizer.
+			$organizer_name  = get_post_meta( $event_id, 'organizer_name', true );
+			$organizer_email = get_post_meta( $event_id, 'organizer_email', true );
+			$organizer_phone = get_post_meta( $event_id, 'organizer_phone', true );
+			$organizer_url   = get_post_meta( $event_id, 'organizer_url', true );
+
+			$organizer = array();
+			$organizer['name'] = $organizer_name;
+			$organizer['email'] = $organizer_email;
+			$organizer['telephone'] = $organizer_phone;
+			$organizer['url'] = $organizer_url;
+			$centralize_event['organizer'] = $organizer;
+
+			return $centralize_event;
+		}
+		return false;
+	}
+
 }

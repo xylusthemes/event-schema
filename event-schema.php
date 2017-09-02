@@ -58,7 +58,8 @@ class Event_Schema{
 			self::$instance->em = new Event_Schema_EM();
 			self::$instance->event_organizer = new Event_Schema_Event_Organizer();
 			self::$instance->aioec = new Event_Schema_Aioec();
-			self::$instance->eventon = new Event_Schema_EventON();		
+			self::$instance->eventon = new Event_Schema_EventON();
+			self::$instance->eventon = new Event_Schema_IFE();	
 		}
 		return self::$instance;	
 	}
@@ -143,6 +144,7 @@ class Event_Schema{
 		require_once ES_PLUGIN_DIR . 'includes/class-event-schema-event_organizer.php';
 		require_once ES_PLUGIN_DIR . 'includes/class-event-schema-aioec.php';
 		require_once ES_PLUGIN_DIR . 'includes/class-event-schema-eventon.php';
+		require_once ES_PLUGIN_DIR . 'includes/class-event-schema-ife.php';
 	}
 
 	/**
