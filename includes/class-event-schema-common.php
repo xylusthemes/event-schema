@@ -87,6 +87,11 @@ class Event_Schema_Common {
 			$supported_plugins['import_facebook_events'] = __( 'Import Facebook Events', 'event-schema' );
 		}
 
+		// check WP Event Aggregator
+		if( class_exists( 'WP_Event_Aggregator' ) ){
+			$supported_plugins['wp_event_aggregator'] = __( 'WP Event Aggregator', 'event-schema' );
+		}
+
 		// check My Calendar
 		/*if ( is_plugin_active( 'my-calendar/my-calendar.php' ) ) {
 			$supported_plugins['my_calendar'] = __( 'My Calendar', 'event-schema' );
