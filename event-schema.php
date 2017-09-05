@@ -60,6 +60,7 @@ class Event_Schema{
 			self::$instance->aioec = new Event_Schema_Aioec();
 			self::$instance->eventon = new Event_Schema_EventON();
 			self::$instance->ife = new Event_Schema_IFE();
+			self::$instance->iee = new Event_Schema_IEE();
 			self::$instance->wpea = new Event_Schema_WPEA();	
 		}
 		return self::$instance;	
@@ -146,6 +147,7 @@ class Event_Schema{
 		require_once ES_PLUGIN_DIR . 'includes/class-event-schema-aioec.php';
 		require_once ES_PLUGIN_DIR . 'includes/class-event-schema-eventon.php';
 		require_once ES_PLUGIN_DIR . 'includes/class-event-schema-ife.php';
+		require_once ES_PLUGIN_DIR . 'includes/class-event-schema-iee.php';
 		require_once ES_PLUGIN_DIR . 'includes/class-event-schema-wpea.php';
 	}
 

@@ -87,6 +87,11 @@ class Event_Schema_Common {
 			$supported_plugins['import_facebook_events'] = __( 'Import Facebook Events', 'event-schema' );
 		}
 
+		// check Import Eventbrite Events
+		if( class_exists( 'Import_Eventbrite_Events' ) ){
+			$supported_plugins['import_eventbrite_events'] = __( 'Import Eventbrite Events', 'event-schema' );
+		}
+
 		// check WP Event Aggregator
 		if( class_exists( 'WP_Event_Aggregator' ) ){
 			$supported_plugins['wp_event_aggregator'] = __( 'WP Event Aggregator', 'event-schema' );
