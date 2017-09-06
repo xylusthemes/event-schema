@@ -146,10 +146,12 @@ class Event_Schema_EM {
 				$event_tikets = $wpdb->get_row( $wpdb->prepare( "SELECT MAX(ticket_price) AS max_ticket, MIN(ticket_price) AS min_ticket FROM " . $wpdb->prefix. "em_tickets WHERE event_id = %d", $emevent_id ) );
 				if( !empty( $event_tikets ) ){
 					$offers = array();
-					$offers['url'] = '';
+					$offers['url'] = $event_url;
 					if( $event_tikets->max_ticket == $event_tikets->min_ticket ){
 						$offers['high_price'] = $event_tikets->max_ticket;
+						$offers['price'] = $event_tikets->max_ticket;
 					}else{
+						$offers['price'] = $event_tikets->min_ticket;
 						$offers['low_price'] = $event_tikets->min_ticket;
 						$offers['high_price'] = $event_tikets->max_ticket;
 					}

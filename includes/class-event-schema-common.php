@@ -220,7 +220,8 @@ class Event_Schema_Common {
 			if( !empty( $offers['low_price'] ) || ! empty( $offers['high_price'] ) ){
 				$xt_ldjson .= '"offers": {';
 				if ( !empty( $offers['low_price'] ) && ! empty( $offers['high_price'] ) ) {
-					$xt_ldjson .= '"lowPrice": "' .  $offers["low_price"] . '",';	
+					$xt_ldjson .= '"price": "' .  $offers["low_price"] . '",';
+					$xt_ldjson .= '"lowPrice": "' .  $offers["low_price"] . '",';
 					$xt_ldjson .= '"highPrice": "' .  $offers["high_price"] . '",';	
 				} else {
 					$xt_ldjson .= '"price": "' . $offers["high_price"] . '",';	
