@@ -2,8 +2,8 @@
 /**
  * Plugin Name:       Event Schema
  * Plugin URI:        http://xylusthemes.com/plugins/event-schema/
- * Description:       Event Schema allows you to import Facebook ( facebook.com ) events into your WordPress site.
- * Version:           1.0.0
+ * Description:       Event Schema is automatically generates Google Rich Snippet Schema for Events.
+ * Version:           1.1.0
  * Author:            Xylus Themes
  * Author URI:        http://xylusthemes.com
  * License:           GPL-2.0+
@@ -83,14 +83,14 @@ class Event_Schema{
 	 *
 	 * @since 1.0.0
 	 */
-	public function __clone() { _doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; huh?', 'event-schema' ), '1.0.0' ); }
+	public function __clone() { _doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; huh?', 'event-schema' ), '1.1.0' ); }
 
 	/**
 	 * A dummy magic method to prevent Event_Schema from being unserialized.
 	 *
 	 * @since 1.0.0
 	 */
-	public function __wakeup() { _doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; huh?', 'event-schema' ), '1.0.0' ); }
+	public function __wakeup() { _doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; huh?', 'event-schema' ), '1.1.0' ); }
 
 
 	/**
@@ -104,7 +104,7 @@ class Event_Schema{
 
 		// Plugin version.
 		if( ! defined( 'ES_VERSION' ) ){
-			define( 'ES_VERSION', '1.0.0' );
+			define( 'ES_VERSION', '1.1.0' );
 		}
 
 		// Plugin folder Path.
@@ -165,7 +165,7 @@ class Event_Schema{
 		load_plugin_textdomain(
 			'event-schema',
 			false,
-			ES_PLUGIN_DIR . '/languages/'
+			basename( dirname( __FILE__ ) ) . '/languages'
 		);
 	
 	}

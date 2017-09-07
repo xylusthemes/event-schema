@@ -204,7 +204,7 @@ class Event_Schema_Admin {
 	public function add_event_schema_credit( $footer_text ) {
 		$screen = get_current_screen();
 		$current_page = isset( $screen->id ) ? $screen->id : '';
-		if ( ' settings_page_event_schema' === $current_page ) {
+		if ( 'settings_page_event_schema' === $current_page ) {
 			$rate_url = 'https://wordpress.org/support/plugin/event-schema/reviews/?rate=5#new-post';
 
 			$footer_text .= sprintf(
@@ -261,7 +261,7 @@ class Event_Schema_Admin {
 				),
 			) );
 
-			if ( ! is_wp_error( $data ) ) {
+			if ( ! is_wp_error( $plugin_data ) ) {
 				
 			} else {
 				// If there was a bug on the Current Request just leave
