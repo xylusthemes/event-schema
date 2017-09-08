@@ -1,8 +1,9 @@
-=== Event Schema / Structured Data: Google Rich Snippet Schema for Event ===
-Contributors: xylus
+=== Event SEO: Event Schema / Structured Data: Google Rich Snippet Schema for Event ===
+Contributors: xylus,dharm1025
 Donate link: http://xylusthemes.com/
-Tags: event, schema, event schema, structured data, event structured data, rich snippets, event rich snippets, SEO, Event Marketing, marketing, automation, google, bing, calendar
+Tags: event, schema, event schema, structured data, event structured data, rich snippets, event rich snippets, SEO, Event Marketing, marketing, automation, google, bing, calendar, Event SEO 
 Requires at least: 4.0
+Requires PHP: 5.4
 Tested up to: 4.8
 Stable tag: 1.1.0
 License: GPLv2 or later
@@ -11,15 +12,22 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Automatically Google Event Rich Snippet Schema Generator. This plug-in generates complete JSON-LD based schema (structured data for Rich Snippet) for events.
 
 == Description ==
-This Plugin will automatically generates Google Rich Snippet Schema for Events. It will improve SEO of Events website. Its works with all leading Events Plug-ins and helps Event Marketing. This plug-in  generates complete JSON-LD based schema (structured data for Rich Snippet) for events
-
-
+Generate Google Event Rich Snippet Schema for your calendar and get event promoted in Google search.
+This plug-in  generates complete JSON-LD based schema (structured data for Rich Snippet) for events and support many leading Event Calendar plugin.
 This Plugin automatically adds complete JSON-LD based schema (structured data) to event posts generated with following plugins.
+
+* Standard Google Event Rich Snippet Schema.
+* Event detail page Event schema 
+* Automatically create Event Rick Snippet for your event, No Manuall work. 
+* Work with leading Event Calendar Plugins like Event Manager, All in one Event Calendar, EventOn, WP Event Aggregator, Import Facebook Events, Import Eventbrite Events, Import Meetup Events
+* Events Manager Ticket can be shown in Google Schema
+* For All In One Event Calendar by Time.ly support Event List , Agenda, Day, Month, Week, Posterboard, Stream. (Pro)
+
 
 **Works with:**
 
 * [Events manager](https://wordpress.org/plugins/events-manager/)
-* [All-in-One Event Calendar](https://wordpress.org/plugins/all-in-one-event-calendar/)
+* [All-in-One Event Calendar by Time.ly](https://wordpress.org/plugins/all-in-one-event-calendar/)
 * [Event Organiser](https://wordpress.org/plugins/event-organiser/)
 * [EventON](https://codecanyon.net/item/eventon-wordpress-event-calendar-plugin/1211017)
 * [WP Event Aggregator](https://wordpress.org/plugins/wp-event-aggregator/)
@@ -30,7 +38,7 @@ This Plugin automatically adds complete JSON-LD based schema (structured data) t
 No configuration required for this plugin its work automatically, you can disable schema from "Settings"->"Event Schema"
 
 **Pro Version with Premiun Support**
-* [Event Schema Pro](https://xylusthemes.com/plugins/event-rich-snippet-schema-generator/)
+* [Event Schema Pro](https://xylusthemes.com/plugins/event-schema/)
 
 
 == Screenshots ==
@@ -55,6 +63,22 @@ No configuration required for this plugin its work automatically, you can disabl
 4. Locate "Event Schema" in the list and click the "Activate" link.
 
 == Changelog ==
+
+= 1.1.0 =
+* Added support for below new plugins
+  - Import Facebook Events
+  - Import Eventbrite Events
+  - Import Meetup Events
+  - WP Event Aggregator
+* Added  Event Manager tickets support
+* Added Events list support for "All-in-One Event Calendar" for below View (PRO)
+  - Agenda
+  - Day
+  - Month
+  - Week
+  - Posterboard
+  - Stream
+* Some bug fixes and improvements
 
 = 1.0.0 =
 * Initial Version.
