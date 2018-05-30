@@ -62,6 +62,12 @@ class Event_Schema_Aioec {
 			global $event_schema, $wpdb, $post;
 			$event_id = get_the_ID();
 			$name = get_the_title();
+
+			$instance_id = 0;
+			if( isset( $_GET['instance_id'] ) && $_GET['instance_id'] > 0 ){
+				$instance_id = absint( $_GET['instance_id'] );
+			}
+
 			$description = $post->post_excerpt;
 			if( trim( $description ) == '' ){
 				$description = addslashes( preg_replace('/((\w+\W*){54}(\w+))(.*)/', '${1}', $post->post_content) );
@@ -76,6 +82,15 @@ class Event_Schema_Aioec {
 				$is_all_day = isset( $db_event->allday ) ? $db_event->allday : 0;
 				$start_date = isset( $db_event->start ) ? date( DATE_ATOM, $db_event->start ) : '';
 				$end_date   = isset( $db_event->end ) ? date( DATE_ATOM, $db_event->end ) : '';
+
+				if( $instance_id > 0 ){
+					$instance_table = $wpdb->prefix.'ai1ec_event_instances';
+					$instance_event = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM $instance_table WHERE `id` = %d AND `post_id` = %d", absint( $instance_id ), absint( $event_id ) ) );
+					if( !empty( $instance_event ) ){
+						$start_date = isset( $instance_event->start ) ? date( DATE_ATOM, $instance_event->start ) : '';
+						$end_date   = isset( $instance_event->end ) ? date( DATE_ATOM, $instance_event->end ) : '';
+					}
+				}
 
 				$centralize_event = array(
 					"ID"         => $event_id,
