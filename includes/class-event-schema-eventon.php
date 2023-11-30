@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 class Event_Schema_EventON {
 
 	// The Events Calendar Event Posttype
-	protected $event_posttype;
+	protected $event_posttype, $taxonomy, $location_taxonomy, $organizer_taxonomy;
 
 	/**
 	 * Initialize the class and set its properties.

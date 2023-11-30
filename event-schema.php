@@ -30,6 +30,7 @@ class Event_Schema{
 	 * Event_Schema The one true Event_Schema.
 	 */
 	private static $instance;
+	public $common, $admin, $em, $event_organizer, $aioec, $eventon, $ife, $iee, $ime, $wpea;
 
     /**
      * Main Event Schema Instance.
