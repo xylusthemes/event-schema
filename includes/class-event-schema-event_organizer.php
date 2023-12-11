@@ -70,8 +70,8 @@ class Event_Schema_Event_Organizer {
 			}
 			$name = get_the_title();
 			$description = $post->post_excerpt;
-			if( trim( $description ) == '' ){
-				$description = addslashes( preg_replace('/((\w+\W*){54}(\w+))(.*)/', '${1}', $post->post_content) );
+			if( empty( trim( $description ) ) ){
+				$description = strip_tags( $post->post_content );
 			}
 			$event_url   = get_permalink();
 			$image_url = "";
