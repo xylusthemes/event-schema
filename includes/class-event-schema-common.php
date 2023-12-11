@@ -262,8 +262,8 @@ class Event_Schema_Common {
 			}
 			$name = get_the_title( $event_id );
 			$description = $post_xt->post_excerpt;
-			if( trim( $description ) == '' ){
-				$description = addslashes( preg_replace('/((\w+\W*){54}(\w+))(.*)/', '${1}', $post_xt->post_content) );
+			if( empty( trim( $description ) ) ){
+				$description = strip_tags( $post_xt->post_content );
 			}
 			
 			$event_url   = get_permalink( $event_id );
