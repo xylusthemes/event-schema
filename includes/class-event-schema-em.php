@@ -84,7 +84,7 @@ class Event_Schema_EM {
 			$name = get_the_title();
 			$description = $post->post_excerpt;
 			if( empty( trim( $description ) ) ){
-				$description = strip_tags( $post->post_content );
+				$description = wp_strip_all_tags( $post->post_content );
 			}
 			$event_url   = get_permalink();
 			$image_url = "";
@@ -116,6 +116,7 @@ class Event_Schema_EM {
 			$is_location_enabled = get_option( 'dbem_locations_enabled', false );
 			if( $is_location_enabled ){
 				$location_id = get_post_meta( $event_id, '_location_id', true );
+				// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 				$event_location = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM " . $wpdb->prefix. "em_locations WHERE location_id = %d", $location_id ) );
 				if( ! empty( $event_location ) ){
 					$centralize_event['location'] = array(
@@ -143,6 +144,7 @@ class Event_Schema_EM {
 
 			if( get_post_meta( $event_id, '_event_rsvp', true ) && get_option( 'dbem_rsvp_enabled', false ) ){
 				$emevent_id = get_post_meta( $event_id, '_event_id', true );
+				// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 				$event_tikets = $wpdb->get_row( $wpdb->prepare( "SELECT MAX(ticket_price) AS max_ticket, MIN(ticket_price) AS min_ticket FROM " . $wpdb->prefix. "em_tickets WHERE event_id = %d", $emevent_id ) );
 				if( !empty( $event_tikets ) ){
 					$offers = array();
@@ -160,6 +162,7 @@ class Event_Schema_EM {
 				}
 			}
 			// Render it.
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			echo $event_schema->common->generate_ldjson( $centralize_event );
 		}		
 	}

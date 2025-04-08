@@ -71,7 +71,7 @@ class Event_Schema_Event_Organizer {
 			$name = get_the_title();
 			$description = $post->post_excerpt;
 			if( empty( trim( $description ) ) ){
-				$description = strip_tags( $post->post_content );
+				$description = wp_strip_all_tags( $post->post_content );
 			}
 			$event_url   = get_permalink();
 			$image_url = "";
@@ -97,6 +97,7 @@ class Event_Schema_Event_Organizer {
 				$venue_id = $venue[0]->term_id;
 				$venue_data = array();
 				$venue_data['name'] = $venue[0]->name;
+				// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 				$venue_info = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM ".$wpdb->prefix."eo_venuemeta WHERE eo_venue_id = %d" , $venue_id ) );
 				if( !empty( $venue_info ) ){
 					foreach ($venue_info as $venue_value ) {
@@ -126,6 +127,7 @@ class Event_Schema_Event_Organizer {
 				}
 			}
 			// Render it.
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			echo $event_schema->common->generate_ldjson( $centralize_event );
 		}		
 	}
