@@ -84,14 +84,14 @@ class Event_Schema{
 	 *
 	 * @since 1.0.0
 	 */
-	public function __clone() { _doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; huh?', 'event-schema' ), '1.1.2' ); }
+	public function __clone() { _doing_it_wrong( __FUNCTION__, esc_attr__( 'Cheatin&#8217; huh?', 'event-schema' ), '1.1.2' ); }
 
 	/**
 	 * A dummy magic method to prevent Event_Schema from being unserialized.
 	 *
 	 * @since 1.0.0
 	 */
-	public function __wakeup() { _doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; huh?', 'event-schema' ), '1.1.2' ); }
+	public function __wakeup() { _doing_it_wrong( __FUNCTION__, esc_attr__( 'Cheatin&#8217; huh?', 'event-schema' ), '1.1.2' ); }
 
 
 	/**

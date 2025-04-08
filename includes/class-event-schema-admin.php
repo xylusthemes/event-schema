@@ -67,7 +67,7 @@ class Event_Schema_Admin {
 	function enqueue_admin_styles( $hook ) {
 
 	  	$css_dir = ES_PLUGIN_URL . 'assets/css/';
-	 	wp_enqueue_style( 'event-schema', $css_dir . 'event-schema-admin.css', false, '' );
+	 	wp_enqueue_style( 'event-schema', $css_dir . 'event-schema-admin.css', array(), ES_VERSION );
 	}
 
 	/**
@@ -82,6 +82,7 @@ class Event_Schema_Admin {
 		    <h2><?php esc_html_e( 'Event Schema', 'event-schema' ); ?></h2>
 		    <?php
 		    // Set Default Tab to Import.
+			// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		    $tab = isset( $_GET['tab'] ) ? sanitize_text_field( wp_unslash( $_GET['tab'] ) ) : 'settings';
 		    ?>
 		    <div id="poststuff">
@@ -208,7 +209,7 @@ class Event_Schema_Admin {
 			$rate_url = 'https://wordpress.org/support/plugin/event-schema/reviews/?rate=5#new-post';
 
 			$footer_text .= sprintf(
-				esc_html__( ' Rate %1$sEvent Schema%2$s %3$s', 'event-schema' ),
+				esc_html__( ' Rate %1$sEvent Schema%2$s %3$s', 'event-schema' ), // phpcs:ignore WordPress.WP.I18n.MissingTranslatorsComment
 				'<strong>',
 				'</strong>',
 				'<a href="' . $rate_url . '" target="_blank">&#9733;&#9733;&#9733;&#9733;&#9733;</a>'

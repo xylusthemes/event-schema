@@ -64,31 +64,33 @@ class Event_Schema_Aioec {
 			$name = get_the_title();
 
 			$instance_id = 0;
-			if( isset( $_GET['instance_id'] ) && $_GET['instance_id'] > 0 ){
-				$instance_id = absint( $_GET['instance_id'] );
+			if( isset( $_GET['instance_id'] ) && $_GET['instance_id'] > 0 ){ // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+				$instance_id = absint( $_GET['instance_id'] ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			}
 
 			$description = $post->post_excerpt;
 			if( empty( trim( $description ) ) ){
-				$description = strip_tags( $post->post_content );
+				$description = wp_strip_all_tags( $post->post_content );
 			}
 			$event_url   = get_permalink();
 			$image_url = "";
 			if( has_post_thumbnail( $event_id ) ){
 				$image_url = get_the_post_thumbnail_url( $event_id , 'full' );
 			}
-			$db_event = $wpdb->get_row( "SELECT * FROM $this->event_db_table WHERE `post_id` = ".absint( $event_id ) );
+			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+			$db_event = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$this->event_db_table} WHERE `post_id` = %d", $event_id ) );
 			if( !empty( $db_event ) ){
 				$is_all_day = isset( $db_event->allday ) ? $db_event->allday : 0;
-				$start_date = isset( $db_event->start ) ? date( DATE_ATOM, $db_event->start ) : '';
-				$end_date   = isset( $db_event->end ) ? date( DATE_ATOM, $db_event->end ) : '';
+				$start_date = isset( $db_event->start ) ? gmdate( DATE_ATOM, $db_event->start ) : '';
+				$end_date   = isset( $db_event->end ) ? gmdate( DATE_ATOM, $db_event->end ) : '';
 
 				if( $instance_id > 0 ){
 					$instance_table = $wpdb->prefix.'ai1ec_event_instances';
+					// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 					$instance_event = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM $instance_table WHERE `id` = %d AND `post_id` = %d", absint( $instance_id ), absint( $event_id ) ) );
 					if( !empty( $instance_event ) ){
-						$start_date = isset( $instance_event->start ) ? date( DATE_ATOM, $instance_event->start ) : '';
-						$end_date   = isset( $instance_event->end ) ? date( DATE_ATOM, $instance_event->end ) : '';
+						$start_date = isset( $instance_event->start ) ? gmdate( DATE_ATOM, $instance_event->start ) : '';
+						$end_date   = isset( $instance_event->end ) ? gmdate( DATE_ATOM, $instance_event->end ) : '';
 					}
 				}
 
@@ -134,6 +136,7 @@ class Event_Schema_Aioec {
 				);
 
 				// Render it.
+				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				echo $event_schema->common->generate_ldjson( $centralize_event );
 
 			}

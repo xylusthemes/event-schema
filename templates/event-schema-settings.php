@@ -18,15 +18,15 @@ $active_plugins = $event_schema->common->get_active_supported_event_plugins();
                                 ?>
                                 <tr>  
                                     <th scope="row">
-                                        <?php printf( esc_html__( 'Disable Event Schema for %s', 'event-schema' ), $value ) ; ?> : 
+                                        <?php printf( esc_attr__( 'Disable Event Schema for %s', 'event-schema' ), esc_attr( $value ) ) ; // phpcs:ignore WordPress.WP.I18n.MissingTranslatorsComment ?> : 
                                     </th>
                                     <td>
                                         <?php 
                                         $update_facebook_events = isset( $facebook_options['update_events'] ) ? $facebook_options['update_events'] : 'no';
                                         ?>
-                                        <input type="checkbox" name="event_schema[<?php echo $key; ?>]" value="<?php echo $key; ?>" <?php if( in_array( $key, $schema_options ) ) { echo 'checked="checked"'; } ?> />
+                                        <input type="checkbox" name="event_schema[<?php echo esc_attr( $key ); ?>]" value="<?php echo esc_attr( $key ); ?>" <?php if( in_array( $key, $schema_options ) ) { echo 'checked="checked"'; } ?> />
                                         <span class="xtei_small">
-                                            <?php printf( __( 'Check to disable event schema(structured data) for %s .', 'event-schema' ), $value ); ?>
+                                            <?php printf( esc_attr__( 'Check to disable event schema(structured data) for %s .', 'event-schema' ), esc_attr( $value ) ); // phpcs:ignore WordPress.WP.I18n.MissingTranslatorsComment ?>
                                         </span>
                                     </td>
                                 </tr>

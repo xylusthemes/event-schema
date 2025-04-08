@@ -40,6 +40,7 @@ class Event_Schema_Common {
 		if ( isset( $_POST['es_action'] ) && $_POST['es_action'] == 'es_save_settings' &&  check_admin_referer( 'es_setting_form_nonce_action', 'es_setting_form_nonce' ) ) {
 				
 			$es_options = array();
+			// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.NonceVerification.Recommended
 			$es_options = isset( $_POST['event_schema'] ) ? $_POST['event_schema'] : array();
 			$is_update = update_option( ES_OPTIONS, $es_options );
 			if( $is_update ){
@@ -263,7 +264,7 @@ class Event_Schema_Common {
 			$name = get_the_title( $event_id );
 			$description = $post_xt->post_excerpt;
 			if( empty( trim( $description ) ) ){
-				$description = strip_tags( $post_xt->post_content );
+				$description = wp_strip_all_tags( $post_xt->post_content );
 			}
 			
 			$event_url   = get_permalink( $event_id );
@@ -275,16 +276,17 @@ class Event_Schema_Common {
 			$start_date = get_post_meta( $event_id, 'start_ts', true );
 			$end_date = get_post_meta( $event_id, 'end_ts', true );
 			
-			if( $start_date != ''){
-				$start_date = date( DATE_ATOM, $start_date );
-				if( $is_all_day ){
-					$start_date = date( 'Y-m-d', $start_date ).' 00:00';
+			if ( $start_date != '' ) {
+				$start_date = gmdate( DATE_ATOM, $start_date );
+				if ( $is_all_day ) {
+					$start_date = gmdate( 'Y-m-d', $start_date ) . ' 00:00';
 				}
 			}
-			if( $end_date != ''){
-				$end_date = date( DATE_ATOM, $end_date );
-				if( $is_all_day ){
-					$end_date = date( 'Y-m-d', $end_date ).' 23:59';
+			
+			if ( $end_date != '' ) {
+				$end_date = gmdate( DATE_ATOM, $end_date );
+				if ( $is_all_day ) {
+					$end_date = gmdate( 'Y-m-d', $end_date ) . ' 23:59';
 				}
 			}
 
@@ -350,5 +352,22 @@ class Event_Schema_Common {
 		}
 		return false;
 	}
+
+	/**
+     * Get Plugin array
+     *
+     * @since 1.1.0
+     * @return array
+     */
+    public function es_get_xyuls_themes_plugins(){
+        return array(
+            'wp-bulk-delete' => array( 'plugin_name' => esc_html__( 'WP Bulk Delete', 'event-schema' ), 'description' => 'Delete posts, pages, comments, users, taxonomy terms and meta fields in bulk with different powerful filters and conditions.' ),
+            'wp-event-aggregator' => array( 'plugin_name' => esc_html__( 'WP Event Aggregator', 'event-schema' ), 'description' => 'WP Event Aggregator: Easy way to import Facebook Events, Eventbrite events, MeetUp events into your WordPress Event Calendar.' ),
+            'import-facebook-events' => array( 'plugin_name' => esc_html__( 'Import Social Events', 'event-schema' ), 'description' => 'Import Facebook events into your WordPress website and/or Event Calendar. Nice Display with shortcode & Event widget.' ),
+            'import-eventbrite-events' => array( 'plugin_name' => esc_html__( 'Import Eventbrite Events', 'event-schema' ), 'description' => 'Import Eventbrite Events into WordPress website and/or Event Calendar. Nice Display with shortcode & Event widget.' ),
+            'import-meetup-events' => array( 'plugin_name' => esc_html__( 'Import Meetup Events', 'event-schema' ), 'description' => 'Import Meetup Events allows you to import Meetup (meetup.com) events into your WordPress site effortlessly.' ),
+            'wp-smart-import' => array( 'plugin_name' => esc_html__( 'WP Smart Import : Import any XML File to WordPress', 'event-schema' ), 'description' => 'The most powerful solution for importing any CSV files to WordPress. Create Posts and Pages any Custom Posttype with content from any CSV file.' ),
+        );
+    }
 
 }

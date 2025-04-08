@@ -54,7 +54,7 @@ class Event_Schema_EventON {
 			$name = get_the_title();
 			$description = $post->post_excerpt;
 			if( empty( trim( $description ) ) ){
-				$description = strip_tags( $post->post_content );
+				$description = wp_strip_all_tags( $post->post_content );
 			}
 			$event_url   = get_permalink();
 			$image_url = "";
@@ -68,11 +68,11 @@ class Event_Schema_EventON {
 			$start = get_post_meta( $event_id, 'evcal_srow', true );
 			$end   = get_post_meta( $event_id, 'evcal_erow', true );
 
-			$start_date = date( DATE_ATOM, $start );
-			$end_date = date( DATE_ATOM, $end );
+			$start_date = gmdate( DATE_ATOM, $start );
+			$end_date = gmdate( DATE_ATOM, $end );
 			if( $is_all_day ){
-				$start_date = date( 'Y-m-d', $start ).' 00:00';
-				$end_date = date( 'Y-m-d', $end ).' 23:59';
+				$start_date = gmdate( 'Y-m-d', $start ).' 00:00';
+				$end_date = gmdate( 'Y-m-d', $end ).' 23:59';
 			}
 			$centralize_event = array(
 				"ID"         => $event_id,
@@ -114,6 +114,7 @@ class Event_Schema_EventON {
 			);
 
 			// Render it.
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			echo $event_schema->common->generate_ldjson( $centralize_event );
 		}		
 	}

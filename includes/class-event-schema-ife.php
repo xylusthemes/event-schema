@@ -66,6 +66,7 @@ class Event_Schema_IFE {
 			$centralize_event = $event_schema->common->es_centralize_array_by_event_id ( $event_id ); 
 
 			// Render it.
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			echo $event_schema->common->generate_ldjson( $centralize_event );
 		}		
 	}
@@ -88,6 +89,7 @@ class Event_Schema_IFE {
 		}
 
 		if( !empty($event_schemas) ){
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			echo $event_schemas_str = '<script type="application/ld+json">['.implode(',', $event_schemas ).']</script>';
 		}
 	}
