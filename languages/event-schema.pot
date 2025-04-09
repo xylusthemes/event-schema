@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-2.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: Event Schema 1.1.2\n"
+"Project-Id-Version: Event Schema 1.1.3\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/event-schema\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-04-08T13:03:49+00:00\n"
+"POT-Creation-Date: 2025-04-09T05:46:03+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: event-schema\n"
@@ -46,68 +46,80 @@ msgstr ""
 msgid "Cheatin&#8217; huh?"
 msgstr ""
 
-#: includes/class-event-schema-admin.php:98
+#: includes/class-event-schema-admin.php:99
 msgid "Settings"
 msgstr ""
 
-#: includes/class-event-schema-admin.php:101
+#: includes/class-event-schema-admin.php:102
 msgid "Support & Help"
 msgstr ""
 
-#: includes/class-event-schema-admin.php:182
+#: includes/class-event-schema-admin.php:183
 msgid "News from Xylus Themes"
 msgstr ""
 
-#: includes/class-event-schema-admin.php:211
+#: includes/class-event-schema-admin.php:212
 msgid " Rate %1$sEvent Schema%2$s %3$s"
 msgstr ""
 
-#: includes/class-event-schema-admin.php:228
+#: includes/class-event-schema-admin.php:229
+#: includes/class-event-schema-common.php:364
 msgid "WP Bulk Delete"
 msgstr ""
 
-#: includes/class-event-schema-admin.php:229
-#: includes/class-event-schema-common.php:102
+#: includes/class-event-schema-admin.php:230
+#: includes/class-event-schema-common.php:103
+#: includes/class-event-schema-common.php:365
 msgid "WP Event Aggregator"
 msgstr ""
 
-#: includes/class-event-schema-admin.php:230
-#: includes/class-event-schema-common.php:87
+#: includes/class-event-schema-admin.php:231
+#: includes/class-event-schema-common.php:88
 msgid "Import Facebook Events"
 msgstr ""
 
-#: includes/class-event-schema-admin.php:231
-#: includes/class-event-schema-common.php:92
+#: includes/class-event-schema-admin.php:232
+#: includes/class-event-schema-common.php:93
+#: includes/class-event-schema-common.php:367
 msgid "Import Eventbrite Events"
 msgstr ""
 
-#: includes/class-event-schema-admin.php:232
-#: includes/class-event-schema-common.php:97
+#: includes/class-event-schema-admin.php:233
+#: includes/class-event-schema-common.php:98
+#: includes/class-event-schema-common.php:368
 msgid "Import Meetup Events"
 msgstr ""
 
-#: includes/class-event-schema-common.php:46
+#: includes/class-event-schema-common.php:47
 msgid "Import settings has been saved successfully."
 msgstr ""
 
-#: includes/class-event-schema-common.php:48
+#: includes/class-event-schema-common.php:49
 msgid "Something went wrong! please try again."
 msgstr ""
 
-#: includes/class-event-schema-common.php:67
+#: includes/class-event-schema-common.php:68
 msgid "Events Manager"
 msgstr ""
 
-#: includes/class-event-schema-common.php:72
+#: includes/class-event-schema-common.php:73
 msgid "Event Organiser"
 msgstr ""
 
-#: includes/class-event-schema-common.php:77
+#: includes/class-event-schema-common.php:78
 msgid "EventON"
 msgstr ""
 
-#: includes/class-event-schema-common.php:82
+#: includes/class-event-schema-common.php:83
 msgid "All in one Event Calendar"
+msgstr ""
+
+#: includes/class-event-schema-common.php:366
+msgid "Import Social Events"
+msgstr ""
+
+#: includes/class-event-schema-common.php:369
+msgid "WP Smart Import : Import any XML File to WordPress"
 msgstr ""
 
 #: templates/admin-sidebar.php:16
@@ -142,66 +154,83 @@ msgstr ""
 msgid "Save Settings"
 msgstr ""
 
-#: templates/event-schema-support.php:28
-msgid "Getting Support"
-msgstr ""
-
-#: templates/event-schema-support.php:29
-msgid "Thanks you for using Event Schema, We are sincerely appreciate your support and we’re excited to see you using our plugins."
-msgstr ""
-
-#: templates/event-schema-support.php:30
-msgid "Our support team is always around to help you."
-msgstr ""
-
-#: templates/event-schema-support.php:32
-msgid "Looking for free support?"
-msgstr ""
-
-#: templates/event-schema-support.php:34
-msgid "Open-source forum on WordPress.org"
+#: templates/event-schema-support.php:33
+#: templates/event-schema-support.php:36
+msgid "Looking for Something?"
 msgstr ""
 
 #: templates/event-schema-support.php:37
-msgid "Looking for more immediate support?"
+msgid "We have documentation of how to delete data in bulk."
 msgstr ""
 
 #: templates/event-schema-support.php:38
-msgid "We offer premium support on our website with the purchase of our premium plugins."
+msgid "Plugin Documentation"
 msgstr ""
 
-#: templates/event-schema-support.php:42
-msgid "Contact us directly (Premium Support)"
+#: templates/event-schema-support.php:44
+#: templates/event-schema-support.php:47
+msgid "Need Any Assistance?"
 msgstr ""
 
-#: templates/event-schema-support.php:45
-msgid "Enjoying Event Schema or have feedback?"
+#: templates/event-schema-support.php:48
+msgid "Our EXPERT Support Team is always ready to help you out."
 msgstr ""
 
-#: templates/event-schema-support.php:61
+#: templates/event-schema-support.php:49
+msgid "Contact Support"
+msgstr ""
+
+#: templates/event-schema-support.php:55
+#: templates/event-schema-support.php:58
+msgid "Found Any Bugs?"
+msgstr ""
+
+#: templates/event-schema-support.php:59
+msgid "Report any Bug that you Discovered, and get Instant Solutions."
+msgstr ""
+
+#: templates/event-schema-support.php:60
+msgid "Report to GitHub"
+msgstr ""
+
+#: templates/event-schema-support.php:66
+#: templates/event-schema-support.php:69
+msgid "Require Customization?"
+msgstr ""
+
+#: templates/event-schema-support.php:70
+msgid "We would love to hear your Integration and Customization Ideas."
+msgstr ""
+
+#: templates/event-schema-support.php:71
+msgid "Connect Our Service"
+msgstr ""
+
+#: templates/event-schema-support.php:77
+#: templates/event-schema-support.php:80
+msgid "Like The Plugin?"
+msgstr ""
+
+#: templates/event-schema-support.php:81
+msgid "Your Review is very important to us as it helps us to grow more."
+msgstr ""
+
+#: templates/event-schema-support.php:82
+msgid "Review Us on WP.org"
+msgstr ""
+
+#: templates/event-schema-support.php:94
 msgid "Plugins you should try"
 msgstr ""
 
-#: templates/event-schema-support.php:80
-msgid "Version:"
+#: templates/event-schema-support.php:143
+msgid "Status : "
 msgstr ""
 
-#: templates/event-schema-support.php:84
-msgid "Requires:"
+#: templates/event-schema-support.php:152
+msgid "Install Free Plugin"
 msgstr ""
 
-#: templates/event-schema-support.php:84
-msgid "WordPress "
-msgstr ""
-
-#: templates/event-schema-support.php:88
-msgid "Active Installs:"
-msgstr ""
-
-#: templates/event-schema-support.php:92
-msgid "Install Now"
-msgstr ""
-
-#: templates/event-schema-support.php:95
-msgid "Buy Now"
+#: templates/event-schema-support.php:158
+msgid "Activate Plugin"
 msgstr ""
