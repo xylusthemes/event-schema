@@ -1,24 +1,24 @@
 === Event SEO: Event Schema / Structured Data: Google Rich Snippet Schema for Event ===
 Contributors: xylus,dharm1025,rajat1192
 Donate link: http://xylusthemes.com/
-Tags: event, Event, schema, SEO, event rich snippets, Google schema  
+Tags: Event, schema, SEO, event rich snippets, Google schema  
 Requires at least: 4.0
 Requires PHP: 5.4
 Tested up to: 6.8
-Stable tag: 1.1.2
+Stable tag: 1.1.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Automatically Google Event Rich Snippet Schema Generator. This plug-in generates complete JSON-LD based schema (structured data for Rich Snippet) for events.
+Automatically generate Google Event Rich Snippet Schema (JSON-LD) for events using popular calendar plugins.
 
 == Description ==
 Generate Google Event Rich Snippet Schema for your calendar and get event promoted in Google search.
+
 This plug-in  generates complete JSON-LD based schema (structured data for Rich Snippet) for events and support many leading Event Calendar plugin.  
-This Plugin automatically adds complete JSON-LD based schema (structured data) to event posts generated with following plugins.
 
 event schema, structured data, event structured data, rich snippets, event rich snippets, Event Marketing, marketing, automation, google, bing, calendar, Event SEO 
 
-[Documentation](https://docs.xylusthemes.com/docs/event-schema/) | [Pro Version](https://xylusthemes.com/plugins/event-schema/)
+📄 [Documentation](https://docs.xylusthemes.com/docs/event-schema/) | ⭐ [Upgrade to Pro](https://xylusthemes.com/plugins/event-schema/) | 🛟 [Get Support](https://xylusthemes.com/support/)
 
 ✅ Standard Google Event Rich Snippet Schema
 📄 Event detail page Event schema
@@ -66,6 +66,12 @@ You can disable schema from **Settings → Event Schema**
 4. Find **Event Schema** and click **Activate**
 
 == Changelog ==
+
+= 1.1.3 =
+* IMPROVEMENT: Updated support page UI for better user experience
+* IMPROVEMENT: Enhanced security with improved XSS protection
+* IMPROVEMENT: Added compatibility support for WordPress 6.8
+* FIXED: Minor bugs and code improvements
 
 = 1.1.2 =
 * FIXED: Description issue
