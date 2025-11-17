@@ -5,7 +5,7 @@ Tags: Event, schema, SEO, event rich snippets, Google schema
 Requires at least: 4.0
 Requires PHP: 5.4
 Tested up to: 6.8
-Stable tag: 1.1.3
+Stable tag: 1.1.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -36,6 +36,10 @@ event schema, structured data, event structured data, rich snippets, event rich 
 - [Import Facebook Events](https://wordpress.org/plugins/import-facebook-events/)
 - [Import Eventbrite Events](https://wordpress.org/plugins/import-eventbrite-events/)
 - [Import Meetup Events](https://wordpress.org/plugins/import-meetup-events/)
+- [WP Events Manager](https://wordpress.org/plugins/wp-events-manager/)
+- [Events Calendar by FooEvents](https://wordpress.org/plugins/fooevents-calendar/)
+- [Eventin – Event Manager, Event Booking, Calendar, Tickets and Registration Plugin](https://wordpress.org/plugins/wp-event-solution/)
+- [EventPrime – Modern Events Calendar, Bookings and Tickets](https://wordpress.org/plugins/eventprime-event-calendar-management/)
 
 
 🔧 No configuration required – it works automatically!  
@@ -66,6 +70,13 @@ You can disable schema from **Settings → Event Schema**
 4. Find **Event Schema** and click **Activate**
 
 == Changelog ==
+
+= 1.1.4 =
+* ADDED: Support for below new plugins ( PRO )
+  - WP Events Manager
+  - Events Calendar by FooEvents
+  - Eventin – Event Manager, Event Booking, Calendar, Tickets and Registration Plugin
+  - EventPrime – Modern Events Calendar, Bookings and Tickets
 
 = 1.1.3 =
 * IMPROVEMENT: Updated support page UI for better user experience
