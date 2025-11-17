@@ -36,10 +36,10 @@ event schema, structured data, event structured data, rich snippets, event rich 
 - [Import Facebook Events](https://wordpress.org/plugins/import-facebook-events/)
 - [Import Eventbrite Events](https://wordpress.org/plugins/import-eventbrite-events/)
 - [Import Meetup Events](https://wordpress.org/plugins/import-meetup-events/)
-- [WP Events Manager](https://wordpress.org/plugins/wp-events-manager/)
-- [Events Calendar by FooEvents](https://wordpress.org/plugins/fooevents-calendar/)
-- [Eventin – Event Manager, Event Booking, Calendar, Tickets and Registration Plugin](https://wordpress.org/plugins/wp-event-solution/)
-- [EventPrime – Modern Events Calendar, Bookings and Tickets](https://wordpress.org/plugins/eventprime-event-calendar-management/)
+- [WP Events Manager](https://wordpress.org/plugins/wp-events-manager/) [(PRO)](https://xylusthemes.com/plugins/event-schema/)
+- [Events Calendar by FooEvents](https://wordpress.org/plugins/fooevents-calendar/) [(PRO)](https://xylusthemes.com/plugins/event-schema/)
+- [Eventin – Event Manager, Event Booking, Calendar, Tickets and Registration Plugin](https://wordpress.org/plugins/wp-event-solution/) [(PRO)](https://xylusthemes.com/plugins/event-schema/)
+- [EventPrime – Modern Events Calendar, Bookings and Tickets](https://wordpress.org/plugins/eventprime-event-calendar-management/) [(PRO)](https://xylusthemes.com/plugins/event-schema/)
 
 
 🔧 No configuration required – it works automatically!  
