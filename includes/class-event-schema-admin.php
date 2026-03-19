@@ -39,8 +39,10 @@ class Event_Schema_Admin {
 		$this->adminpage_url = admin_url( 'options-general.php?page=event_schema' );
 
 		add_action( 'admin_menu', array( $this, 'add_menu_pages' ) );
+		add_filter( 'submenu_file', array( $this, 'get_selected_tab_submenu_wpec' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_styles' ) );
-		add_action( 'admin_notices', array( $this, 'display_notices' ) );
+		add_action( 'admin_notices', array( $this,'ec_display_all_notices' ), 1 );
+		add_action( 'ec_display_all_notice', array( $this, 'ec_display_notices' ) );
 		add_filter( 'admin_footer_text', array( $this, 'add_event_schema_credit' ) );
 		add_action( 'wp_dashboard_setup', array( $this, 'add_dashboard_widget') );
 	}
@@ -52,8 +54,33 @@ class Event_Schema_Admin {
 	 * @return void
 	 */
 	public function add_menu_pages() {
-		add_options_page( __( 'Event Schema', 'event-schema' ), __( 'Event Schema', 'event-schema' ), 'manage_options', 'event_schema', array( $this, 'admin_page' ) );
+
+		add_menu_page( __( 'Event Schema', 'event-schema' ), __( 'Event Schema', 'event-schema' ), 'manage_options', 'event_schema', array( $this, 'admin_page' ), 'dashicons-analytics', '30' );
+		global $submenu;
+		$submenu['event_schema'][] = array( __( 'Settings', 'event-schema' ), 'manage_options', admin_url( 'admin.php?page=event_schema&tab=settings' ) );
+		$submenu['event_schema'][] = array( __( 'Support', 'event-schema' ), 'manage_options', admin_url( 'admin.php?page=event_schema&tab=support' ) );
+		if( !wpec_is_pro() ){
+        	$submenu['event_schema'][] = array( '<li class="wpec_upgrade_pro current">' . __( 'Upgrade to Pro', 'event-schema' ) . '</li>', 'manage_options', esc_url( "https://xylusthemes.com/plugins/event-schema/") );
+		}
 	}
+
+	/**
+	 * Tab Submenu got selected.
+	 *
+	 * @since 1.6.7
+	 * @return void
+	 */
+	public function get_selected_tab_submenu_wpec( $submenu_file ){
+		if( !empty( $_GET['page'] ) && esc_attr( sanitize_text_field( wp_unslash( $_GET['page'] ) ) ) == 'event_schema' ){ // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$allowed_tabs = array( 'settings', 'support' );
+			$tab = isset( $_GET['tab'] ) ? esc_attr( sanitize_text_field( wp_unslash( $_GET['tab'] ) ) ) : 'settings'; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			if( in_array( $tab, $allowed_tabs ) ){
+				$submenu_file = admin_url( 'admin.php?page=event_schema&tab='.$tab );
+			}
+		}
+		return $submenu_file;
+	}
+
 
 	/**
 	 * Load Admin Styles.
@@ -66,8 +93,11 @@ class Event_Schema_Admin {
 	 */
 	function enqueue_admin_styles( $hook ) {
 
-	  	$css_dir = ES_PLUGIN_URL . 'assets/css/';
-	 	wp_enqueue_style( 'event-schema', $css_dir . 'event-schema-admin.css', array(), ES_VERSION );
+		$page    = isset( $_GET['page'] ) ? esc_attr( sanitize_text_field( wp_unslash( $_GET['page'] ) ) ) : '';
+		$css_dir = ES_PLUGIN_URL . 'assets/css/';
+		if( 'event_schema' == $page ){
+	 		wp_enqueue_style( 'event-schema', $css_dir . 'event-schema-admin.css', array(), ES_VERSION );
+		}
 	}
 
 	/**
@@ -77,51 +107,73 @@ class Event_Schema_Admin {
 	 * @return void
 	 */
 	function admin_page() {
+		global $event_schema;
+		
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$page_title = isset( $_GET['tab'] ) ? esc_attr( sanitize_text_field( wp_unslash( ucwords( $_GET['tab'] ) ) ) ) : 'Settings';
+        $active_tab = isset( $_GET['tab'] ) ? esc_attr( sanitize_text_field( wp_unslash( $_GET['tab'] ) ) ) : 'settings';
+        $gettab     = ucwords( str_replace( '_', ' ', $active_tab ) );
+        if( $active_tab == 'settings' || $active_tab == 'support' ){
+            $gettab     = ucwords( str_replace( '_', ' ', $gettab ) );
+            $page_title = $gettab;
+        }
+        
+        $posts_header_result = $event_schema->common->wpec_render_common_header( $page_title );
+        ?>
+        
+        <div class="ec-container" >
+            <div class="ec-wrap" >
+                <div id="poststuff">
+                    <div id="post-body" class="metabox-holder columns-2">
+                        <?php
+                            do_action( 'ec_display_all_notice' ); 
+                        ?>
+                        <div class="ajax_wpec_notice"></div>
+                        <div id="postbox-container-2" class="postbox-container">
+                            <div class="ec-app">
+                                <div class="ec-tabs">
+                                    <div class="tabs-scroller">
+                                        <div class="var-tabs var-tabs--item-horizontal var-tabs--layout-horizontal-padding">
+											<div class="var-tabs__tab-wrap var-tabs--layout-horizontal">
+												<a href="<?php echo esc_url( admin_url( 'admin.php?page=event_schema&tab=settings' ) ); ?>" class="var-tab <?php echo $active_tab == 'settings' ? 'var-tab--active' : 'var-tab--inactive'; ?>">
+													<span class="tab-label"><?php esc_attr_e( 'Settings', 'xt-feed-for-linkedin' ); ?></span>
+												</a>
+												<a href="<?php echo esc_url( admin_url( 'admin.php?page=event_schema&tab=support' ) ); ?>" class="var-tab <?php echo $active_tab == 'support' ? 'var-tab--active' : 'var-tab--inactive'; ?>">
+													<span class="tab-label"><?php esc_attr_e( 'Support & Help', 'xt-feed-for-linkedin' ); ?></span>
+												</a>
+											</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <?php
+						
+                            if( $active_tab == 'settings' ){
+                                require_once ES_PLUGIN_DIR . '/templates/event-schema-settings.php';
+                            }elseif( $active_tab == 'support' ){
+                                require_once ES_PLUGIN_DIR . '/templates/event-schema-support.php';
+                            }
+                            ?>
+                        </div>
+                    </div>
+                    <br class="clear">
+                </div>
+            </div>
+        </div>
+        <?php
+        $posts_footer_result = $event_schema->common->wpec_render_common_footer();
 		?>
-		<div class="wrap">
-		    <h2><?php esc_html_e( 'Event Schema', 'event-schema' ); ?></h2>
-		    <?php
-		    // Set Default Tab to Import.
-			// phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		    $tab = isset( $_GET['tab'] ) ? sanitize_text_field( wp_unslash( $_GET['tab'] ) ) : 'settings';
-		    ?>
-		    <div id="poststuff">
-		        <div id="post-body" class="metabox-holder columns-2">
-
-		            <div id="postbox-container-1" class="postbox-container">
-		            	<?php require_once ES_PLUGIN_DIR . '/templates/admin-sidebar.php'; ?>
-		            </div>
-		            <div id="postbox-container-2" class="postbox-container">
-
-		                <h1 class="nav-tab-wrapper">
-
-		                    <a href="<?php echo esc_url( add_query_arg( 'tab', 'settings', $this->adminpage_url ) ); ?>" class="nav-tab <?php if ( 'settings' === $tab ) { echo 'nav-tab-active'; } ?>">
-		                        <?php esc_html_e( 'Settings', 'event-schema' ); ?>
-		                    </a>
-		                    <a href="<?php echo esc_url( add_query_arg( 'tab', 'support', $this->adminpage_url ) ); ?>" class="nav-tab <?php if ( $tab == 'support' ) { echo 'nav-tab-active'; } ?>">
-		                        <?php esc_html_e( 'Support & Help', 'event-schema' ); ?>
-		                    </a>
-		                </h1>
-
-		                <div class="event-schema-page">
-
-		                	<?php
-		                	if ( 'settings' === $tab ) {
-
-		                		require_once ES_PLUGIN_DIR . '/templates/event-schema-settings.php';
-
-		                	}elseif ( $tab == 'support' ) {
-		                		
-		                		require_once ES_PLUGIN_DIR . '/templates/event-schema-support.php';
-
-		                	}
-			                ?>
-		                	<div style="clear: both"></div>
-		                </div>
-		        </div>		        
-		    </div>
-		</div>
 		<?php
+	}
+
+	/**
+	 * Remove All Notices
+	 */
+	public function ec_display_all_notices() {
+		// Remove default notices display.
+		remove_action( 'admin_notices', 'wp_admin_notices' );
+		remove_action( 'all_admin_notices', 'wp_admin_notices' );
 	}
 
 	/**
@@ -129,13 +181,13 @@ class Event_Schema_Admin {
 	 *
 	 * @since    1.0.0
 	 */
-	public function display_notices() {
+	public function ec_display_notices() {
 		global $es_errors, $es_success_msg, $es_warnings, $es_info_msg;
 
 		if ( ! empty( $es_errors ) ) {
 			foreach ( $es_errors as $error ) :
 			    ?>
-			    <div class="notice notice-error is-dismissible">
+			    <div class="notice notice-error is-dismissible ec-notice">
 			        <p><?php echo esc_attr( $error ); ?></p>
 			    </div>
 			    <?php
@@ -145,7 +197,7 @@ class Event_Schema_Admin {
 		if ( ! empty( $es_success_msg ) ) {
 			foreach ( $es_success_msg as $success ) :
 			    ?>
-			    <div class="notice notice-success is-dismissible">
+			    <div class="notice notice-success is-dismissible ec-notice">
 			        <p><?php echo esc_attr( $success ); ?></p>
 			    </div>
 			    <?php
@@ -155,7 +207,7 @@ class Event_Schema_Admin {
 		if ( ! empty( $es_warnings ) ) {
 			foreach ( $es_warnings as $warning ) :
 			    ?>
-			    <div class="notice notice-warning is-dismissible">
+			    <div class="notice notice-warning is-dismissible ec-notice">
 			        <p><?php echo esc_attr( $warning ); ?></p>
 			    </div>
 			    <?php
@@ -165,7 +217,7 @@ class Event_Schema_Admin {
 		if ( ! empty( $es_info_msg ) ) {
 			foreach ( $es_info_msg as $info ) :
 			    ?>
-			    <div class="notice notice-info is-dismissible">
+			    <div class="notice notice-info is-dismissible ec-notice">
 			        <p><?php echo esc_attr( $info ); ?></p>
 			    </div>
 			    <?php

@@ -52,6 +52,7 @@ class Event_Schema{
 			self::$instance->setup_constants();
 
 			add_action( 'plugins_loaded', array( self::$instance, 'load_textdomain' ) );
+			add_filter( 'plugin_action_links_' . plugin_basename(__FILE__), array( self::$instance, 'wpes_setting_doc_links' ) );
 
 			self::$instance->includes();
 			self::$instance->common = new Event_Schema_Common();
@@ -152,6 +153,34 @@ class Event_Schema{
 		require_once ES_PLUGIN_DIR . 'includes/class-event-schema-iee.php';
 		require_once ES_PLUGIN_DIR . 'includes/class-event-schema-ime.php';
 		require_once ES_PLUGIN_DIR . 'includes/class-event-schema-wpea.php';
+	}
+
+	/**
+	 * WPES setting And docs link add in plugin page.
+	 *
+	 * @since 1.0
+	 * @return void
+	 */
+	public function wpes_setting_doc_links( $links ) {
+		$iee_setting_doc_link = array(
+			'wpes-event-setting' => sprintf(
+				'<a href="%s">%s</a>',
+				esc_url( admin_url( 'admin.php?page=event_schema&tab=settings' ) ),
+				esc_html__( 'Setting', 'event-schema' )
+			),
+			'wpes-event-docs' => sprintf(
+				'<a target="_blank" href="%s">%s</a>',
+				esc_url( 'https://docs.xylusthemes.com/docs/event-schema/' ),
+				esc_html__( 'Docs', 'event-schema' )
+			),
+			'wpes-event-pro-link' => sprintf(
+				'<a href="%s" target="_blank" style="color:#1da867;font-weight: 900;">%s</a>',
+				esc_url( 'https://xylusthemes.com/plugins/event-schema/' ),
+				esc_html__( 'Upgrade to Pro', 'event-schema' )
+			),
+		);
+
+		return array_merge( $links, $iee_setting_doc_link );
 	}
 
 	/**
