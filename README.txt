@@ -4,8 +4,8 @@ Donate link: http://xylusthemes.com/
 Tags: Event, schema, SEO, event rich snippets, Google schema  
 Requires at least: 4.0
 Requires PHP: 5.4
-Tested up to: 6.9
-Stable tag: 1.1.4
+Tested up to: 7.0
+Stable tag: 1.1.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -70,6 +70,11 @@ You can disable schema from **Settings → Event Schema**
 4. Find **Event Schema** and click **Activate**
 
 == Changelog ==
+
+= 1.1.5 =
+* ADDED: Revamped admin interface with new, user-friendly GUI
+* ADDED: Support and Docs link in plugin list page
+* IMPROVEMENTS: Support for WP 7.0
 
 = 1.1.4 =
 * ADDED: Support for below new plugins ( PRO )
