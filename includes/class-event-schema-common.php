@@ -72,6 +72,7 @@ class Event_Schema_Common {
 		$supported_plugins['eventin']                  = esc_attr__( 'EventIn', 'event-schema' );
 		$supported_plugins['wp_events_manager']        = esc_attr__( 'WP Events Manager', 'event-schema' );
 		$supported_plugins['foo_event']                = esc_attr__( 'Foo Event', 'event-schema' );
+		$supported_plugins['eec']                      = esc_attr__( 'Easy Events Calendar', 'event-schema' );
 		return $supported_plugins;
 	}
 
@@ -93,10 +94,10 @@ class Event_Schema_Common {
 		$xt_ldjson .= '{';
 	
 		if( isset( $event['name'] ) && $event['name'] != '' ){
-			$xt_ldjson .= '"name":"' . esc_attr( $event["name"] ) . '",';
+			$xt_ldjson .= '"name":' . wp_json_encode( html_entity_decode( wp_unslash( $event["name"] ), ENT_QUOTES, 'UTF-8' ) ) . ',';
 		}
 		if( isset( $event['description'] ) && $event['description'] != '' ){
-			$xt_ldjson .= '"description":' . json_encode( $event["description"] ). ',';
+			$xt_ldjson .= '"description":' . wp_json_encode( html_entity_decode( wp_unslash( $event["description"] ), ENT_QUOTES, 'UTF-8' ) ) . ',';
 		}
 		if( isset( $event['url'] ) && $event['url'] != '' ){
 			$xt_ldjson .= '"url":"' . esc_url( $event["url"] ) . '",';
@@ -115,7 +116,7 @@ class Event_Schema_Common {
 			$location = $event['location'];
 			$xt_ldjson .= '"location":{';
 			if( isset( $location['name'] ) && $location['name'] != '' ){
-				$xt_ldjson .= '"name":"' . esc_attr( $location["name"] ) . '",';
+				$xt_ldjson .= '"name":' . wp_json_encode( html_entity_decode( wp_unslash( $location["name"] ), ENT_QUOTES, 'UTF-8' ) ) . ',';
 			}
 			if( isset( $location['telephone'] ) && $location['telephone'] != '' ){
 				$xt_ldjson .= '"telephone":"' . esc_attr( $location["telephone"] ) . '",';
@@ -128,16 +129,16 @@ class Event_Schema_Common {
 				$address = $location['address'];
 				$xt_ldjson .= '"address":{';
 				if( isset( $address['street_address'] ) && $address['street_address'] != '' ){
-					$xt_ldjson .= '"streetAddress":"' . esc_attr( $address["street_address"] ) . '",';
+					$xt_ldjson .= '"streetAddress":' . wp_json_encode( html_entity_decode( wp_unslash( $address["street_address"] ), ENT_QUOTES, 'UTF-8' ) ) . ',';
 				}
 				if( isset( $address['address_locality'] ) && $address['address_locality'] != '' ){
-					$xt_ldjson .= '"addressLocality":"' . esc_attr( $address["address_locality"] ) . '",';
+					$xt_ldjson .= '"addressLocality":' . wp_json_encode( html_entity_decode( wp_unslash( $address["address_locality"] ), ENT_QUOTES, 'UTF-8' ) ) . ',';
 				}
 				if( isset( $address['address_region'] ) && $address['address_region'] != '' ){
-					$xt_ldjson .= '"addressRegion":"' . esc_attr( $address["address_region"] ) . '",';
+					$xt_ldjson .= '"addressRegion":' . wp_json_encode( html_entity_decode( wp_unslash( $address["address_region"] ), ENT_QUOTES, 'UTF-8' ) ) . ',';
 				}
 				if( isset( $address['address_country'] ) && $address['address_country'] != '' ){
-					$xt_ldjson .= '"addressCountry":"' . esc_attr( $address["address_country"] ) . '",';
+					$xt_ldjson .= '"addressCountry":' . wp_json_encode( html_entity_decode( wp_unslash( $address["address_country"] ), ENT_QUOTES, 'UTF-8' ) ) . ',';
 				}
 				if( isset( $address['postal_code'] ) && $address['postal_code'] != '' ){
 					$xt_ldjson .= '"postalCode":"' . esc_attr( $address["postal_code"] ) . '",';
@@ -163,9 +164,9 @@ class Event_Schema_Common {
 			$organizer = $event['organizer'];
 			if( isset( $organizer['name'] ) && $organizer['name'] != '' ){
 				$xt_ldjson .= '"organizer": {';
-				$xt_ldjson .= '"name":"' . $organizer["name"] . '",';
+				$xt_ldjson .= '"name":' . wp_json_encode( html_entity_decode( wp_unslash( $organizer["name"] ), ENT_QUOTES, 'UTF-8' ) ) . ',';
 				if( isset( $organizer['description'] ) && $organizer['description'] != '' ){
-					$xt_ldjson .= '"description": "' . addslashes( $organizer["description"] ) . '",';	
+					$xt_ldjson .= '"description":' . wp_json_encode( html_entity_decode( wp_unslash( $organizer["description"] ), ENT_QUOTES, 'UTF-8' ) ) . ',';	
 				}
 				if( isset( $organizer['email'] ) && $organizer['email'] != '' ){
 					$xt_ldjson .= '"email": "' . esc_url( $organizer["email"] ) . '",';	

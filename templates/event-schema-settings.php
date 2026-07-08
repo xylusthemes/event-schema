@@ -11,7 +11,7 @@ $active_plugins = $event_schema->common->get_active_supported_event_plugins();
             <h2 class="xtei-section-title"><?php esc_html_e( 'Event Schema Controls', 'event-schema' ); ?></h2>
             <div class="xtei-grid">
                 <?php
-                $pro_plugins = array( 'eventprime', 'eventin', 'wp_events_manager', 'foo_event' );
+                $pro_plugins = array( 'eventprime', 'eventin', 'wp_events_manager', 'foo_event', 'eec' );
 
                 if ( ! empty( $active_plugins ) ) {
                     foreach ( $active_plugins as $key => $value ) {
