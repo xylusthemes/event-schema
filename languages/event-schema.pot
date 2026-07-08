@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-03-20T13:09:16+00:00\n"
+"POT-Creation-Date: 2026-07-08T07:03:13+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: event-schema\n"
@@ -76,13 +76,13 @@ msgid " Rate %1$sEvent Schema%2$s %3$s"
 msgstr ""
 
 #: includes/class-event-schema-admin.php:281
-#: includes/class-event-schema-common.php:329
+#: includes/class-event-schema-common.php:330
 msgid "WP Bulk Delete"
 msgstr ""
 
 #: includes/class-event-schema-admin.php:282
 #: includes/class-event-schema-common.php:70
-#: includes/class-event-schema-common.php:330
+#: includes/class-event-schema-common.php:331
 msgid "WP Event Aggregator"
 msgstr ""
 
@@ -93,13 +93,13 @@ msgstr ""
 
 #: includes/class-event-schema-admin.php:284
 #: includes/class-event-schema-common.php:68
-#: includes/class-event-schema-common.php:332
+#: includes/class-event-schema-common.php:333
 msgid "Import Eventbrite Events"
 msgstr ""
 
 #: includes/class-event-schema-admin.php:285
 #: includes/class-event-schema-common.php:69
-#: includes/class-event-schema-common.php:333
+#: includes/class-event-schema-common.php:334
 msgid "Import Meetup Events"
 msgstr ""
 
@@ -143,11 +143,15 @@ msgstr ""
 msgid "Foo Event"
 msgstr ""
 
-#: includes/class-event-schema-common.php:331
+#: includes/class-event-schema-common.php:75
+msgid "Easy Events Calendar"
+msgstr ""
+
+#: includes/class-event-schema-common.php:332
 msgid "Import Social Events"
 msgstr ""
 
-#: includes/class-event-schema-common.php:334
+#: includes/class-event-schema-common.php:335
 msgid "WP Smart Import : Import any XML File to WordPress"
 msgstr ""
 
