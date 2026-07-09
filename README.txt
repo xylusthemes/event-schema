@@ -5,7 +5,7 @@ Tags: Event, schema, SEO, event rich snippets, Google schema
 Requires at least: 4.0
 Requires PHP: 5.4
 Tested up to: 7.0
-Stable tag: 1.1.5
+Stable tag: 1.1.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -70,6 +70,9 @@ You can disable schema from **Settings → Event Schema**
 4. Find **Event Schema** and click **Activate**
 
 == Changelog ==
+
+= 1.1.6 =
+* ADDED: Added Easy Events Calendar Support ( Pro )
 
 = 1.1.5 =
 * ADDED: Revamped admin interface with new, user-friendly GUI

@@ -3,7 +3,7 @@
  * Plugin Name:       Event Schema
  * Plugin URI:        http://xylusthemes.com/plugins/event-schema/
  * Description:       Event Schema is automatically generates Google Rich Snippet Schema for Events.
- * Version:           1.1.5
+ * Version:           1.1.6
  * Author:            Xylus Themes
  * Author URI:        http://xylusthemes.com
  * License:           GPL-2.0+
@@ -85,14 +85,14 @@ class Event_Schema{
 	 *
 	 * @since 1.0.0
 	 */
-	public function __clone() { _doing_it_wrong( __FUNCTION__, esc_attr__( 'Cheatin&#8217; huh?', 'event-schema' ), '1.1.5' ); }
+	public function __clone() { _doing_it_wrong( __FUNCTION__, esc_attr__( 'Cheatin&#8217; huh?', 'event-schema' ), '1.1.6' ); }
 
 	/**
 	 * A dummy magic method to prevent Event_Schema from being unserialized.
 	 *
 	 * @since 1.0.0
 	 */
-	public function __wakeup() { _doing_it_wrong( __FUNCTION__, esc_attr__( 'Cheatin&#8217; huh?', 'event-schema' ), '1.1.5' ); }
+	public function __wakeup() { _doing_it_wrong( __FUNCTION__, esc_attr__( 'Cheatin&#8217; huh?', 'event-schema' ), '1.1.6' ); }
 
 
 	/**
@@ -106,7 +106,7 @@ class Event_Schema{
 
 		// Plugin version.
 		if( ! defined( 'ES_VERSION' ) ){
-			define( 'ES_VERSION', '1.1.5' );
+			define( 'ES_VERSION', '1.1.6' );
 		}
 
 		// Plugin folder Path.
