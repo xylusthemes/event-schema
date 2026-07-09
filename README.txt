@@ -28,6 +28,7 @@ event schema, structured data, event structured data, rich snippets, event rich 
 
 
 ### 🎯 Supported Plugins:
+- [Easy Events Calendar](https://wordpress.org/plugins/xylus-events-calendar/)
 - [Events Manager](https://wordpress.org/plugins/events-manager/)
 - [All-in-One Event Calendar by Time.ly](https://wordpress.org/plugins/all-in-one-event-calendar/)
 - [Event Organiser](https://wordpress.org/plugins/event-organiser/)
